@@ -1,2 +1,1 @@
-# toothpick
-Toothpick Game
+# Toothpick Game
