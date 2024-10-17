@@ -9,6 +9,8 @@ const buyWoodBtn = document.getElementById('buyWoodBtn');
 let toothpicks = 0;
 let unsoldInventory = 0;
 let wood = 100;
+let toothpickPrice = 0.50;
+let availableFunds = 0;
 
 makerBtn.addEventListener('click', () => {
     if (wood > 0) {
@@ -26,3 +28,11 @@ buyWoodBtn.addEventListener('click', () => {
    woodStockElement.textContent = wood;
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const sold = setInterval(() => {
+        availableFunds = availableFunds + (unsoldInventory*toothpickPrice);
+        unsoldInventory = 0;
+        unsoldElement.textContent = unsoldInventory;
+        availableFundsElement.textContent = availableFunds
+    }, 1000)
+});
