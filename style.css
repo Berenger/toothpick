@@ -1,16 +1,19 @@
 html, body {
     height:100%;
+    padding: 0;
+    margin: 0;
+    color: #2C2C2E;
+    background-color:#FFF;
 }
 
 .terminal {
     font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
     font-size: 12px;
-    background-color: #1e1e1e;
+    background-color: #1E1E1E;
     padding: 20px;
-    border-radius: 5px;
     overflow: auto;
-    color: white;
-    margin-top: 0;
+    color: #F6DDB9;
+    margin: 0;
 }
 
 .container{
