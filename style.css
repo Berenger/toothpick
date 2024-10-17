@@ -39,3 +39,9 @@ html, body {
 .three {
     width:40%;
 }
+
+.action {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
