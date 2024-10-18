@@ -19,16 +19,17 @@
         <h4>Business</h4>
         <p>
           Available Funds: $ <span id="availableFunds">0.00</span><br />
-          Unsold Inventory: <span id="unsoldInventory">0</span>
+          Unsold Inventory: <span id="unsoldInventory">0</span><br />
+          <button id="downSellPriceBtn">Down</button> <button id="upSellPriceBtn">Up</button> Price per Toothpick: <span id="sellPrice">0.27</span>
         </p>
         <h4>Manufacturing</h4>
         <p>
           <button id="buytwigsBtn">Twigs</button>
           <span id="twigsStock"></span> ounces<br />
           Cost: $ <span id="twigsPrice">0.00</span><br />
-          <span id="toggleTraderBtn" class="action">Trader: false</span>
+          <span id="toggleTraderBtn" class="action" style="display: none;">Trader: false</span>
         </p>
-        <p>
+        <p id="pickMasterGst" style="display: none;">
           <button id="buyPickMasterBtn">AutoTailor</button>
           <span id="pickMaster">0</span><br />
           Cost: <span id="pickMasterPrice">5.50</span>

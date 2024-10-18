@@ -5,11 +5,14 @@ const availableFundsElement = document.getElementById("availableFunds");
 const twigsPriceElement = document.getElementById("twigsPrice");
 const pickMasterElement = document.getElementById("pickMaster");
 const pickMasterPriceElement = document.getElementById("pickMasterPrice");
+const sellPriceElement = document.getElementById("sellPrice");
 
 const makerBtn = document.getElementById("makerBtn");
 const buytwigsBtn = document.getElementById("buytwigsBtn");
 const toggleTraderBtn = document.getElementById("toggleTraderBtn");
 const buyPickMasterBtn = document.getElementById("buyPickMasterBtn");
+const downSellPriceBtn = document.getElementById("downSellPriceBtn");
+const upSellPriceBtn = document.getElementById("upSellPriceBtn");
 
 const pickMasterBasePrice =  5.55;
 const twigsBaseQty =  1000;
@@ -19,7 +22,7 @@ let unsoldInventory = 0;
 let twigs = twigsBaseQty;
 let availableFunds = 0;
 let pickMaster = 0;
-let toothpickPrice = 0.5;
+let sellPrice = 0.27;
 let twigsPrice = 14;
 let pickMasterPrice = pickMasterBasePrice;
 let salesQty = 1;
@@ -31,6 +34,18 @@ makerBtn.addEventListener("click", () => {
 
 buytwigsBtn.addEventListener("click", () => {
   buytwigs();
+});
+
+downSellPriceBtn.addEventListener("click", () => {
+  if(sellPrice > 0.01) {
+    sellPrice = sellPrice - 0.01;
+    sellPriceElement.textContent = formatPrice(sellPrice);
+  }
+});
+
+upSellPriceBtn.addEventListener("click", () => {
+  sellPrice = sellPrice + 0.01;
+  sellPriceElement.textContent = formatPrice(sellPrice);
 });
 
 buyPickMasterBtn.addEventListener("click", () => {
@@ -61,6 +76,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (autoBuy && twigs < 10) {
       buytwigs();
     }
+
+    if(toothpicks > 250) {
+      document.getElementById("pickMasterGst").style.display = "block";
+    }
+
+    if(toothpicks > 25000) {
+      document.getElementById("toggleTraderBtn").style.display = "block";
+    }
+
   }, 100);
 
   const sold = setInterval(() => {
@@ -71,27 +95,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let i = 0; i < max; i++) {
         if (unsoldInventory >= salesQty) {
-        availableFunds = availableFunds + salesQty * toothpickPrice;
+        availableFunds = availableFunds + salesQty * sellPrice;
         unsoldInventory = unsoldInventory - salesQty;
         unsoldElement.textContent = unsoldInventory;
         availableFundsElement.textContent = formatPrice(availableFunds);
         }
     }
-  }, 500);
+  }, 100);
 
   const maker = setInterval(() => {
     for (let i = 0; i < pickMaster; i++) {
         makeAToothpick();
     }
-  }, 500);
+  }, 1000);
 
   const market = setInterval(() => {
-    twigsPrice = twigsPrice + 1;
-    if (twigsPrice > 25) {
-      twigsPrice = 14;
+    let min = twigsPrice - 3;
+    let max = twigsPrice + 3;
+    twigsPrice = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    if(twigsPrice < 14) {
+      twigsPrice = 14
     }
+
     twigsPriceElement.textContent = formatPrice(twigsPrice);
-  }, 5000);
+  }, 2500);
 });
 
 function buytwigs() {
