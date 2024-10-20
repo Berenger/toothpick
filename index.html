@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Toothpick</title>
+    <title>Toothpicks Apocalypse</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -14,25 +14,32 @@
     </div>
     <div class="container">
       <div class="column one">
-        <h4>Toothpicks : <span id="toothpickStock">0</span></h4>
-        <button id="makerBtn">Make toothpick</button>
-        <h4>Business</h4>
+        <h2>Toothpicks : <span id="toothpickStock">0</span></h4>
+        <button id="makerBtn">Make Toothpick</button>
+        <h4>Market</h4>
         <p>
           Available Funds: $ <span id="availableFunds">0.00</span><br />
           Unsold Inventory: <span id="unsoldInventory">0</span><br />
-          <button id="downSellPriceBtn">Down</button> <button id="upSellPriceBtn">Up</button> Price per Toothpick: <span id="sellPrice">0.27</span>
+          <button id="downSellPriceBtn">Down</button> <button id="upSellPriceBtn">Up</button> Sell Price: <span id="sellPrice">0.05</span>
         </p>
-        <h4>Manufacturing</h4>
+        <h4>Crafting</h4>
         <p>
-          <button id="buytwigsBtn">Twigs</button>
+          <button id="buyTwigsBtn">Twigs</button>
           <span id="twigsStock"></span> ounces<br />
           Cost: $ <span id="twigsPrice">0.00</span><br />
+          Available: <span id="twigsOnEarth"></span> ounces<br />
           <span id="toggleTraderBtn" class="action" style="display: none;">Trader: false</span>
         </p>
-        <p id="pickMasterGst" style="display: none;">
+        <br />
+        <p id="autoTailorGst" style="display: none;">
           <button id="buyPickMasterBtn">AutoTailor</button>
-          <span id="pickMaster">0</span><br />
-          Cost: <span id="pickMasterPrice">5.50</span>
+          <span id="autoTailor">0</span><br />
+          Cost: $ <span id="autoTailorPrice">5.50</span>
+        </p>
+        <h4>Marketing</h4>
+        <p>
+          Level: <span id="marketingLevel">1</span><br />
+          <button id="upMarketingBtn">Up</button> Cost: $ <span id="marketingPrice">100</span>
         </p>
       </div>
       <div class="column two"></div>
