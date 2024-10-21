@@ -27,10 +27,10 @@ const upMarketingBtn = document.getElementById("upMarketingBtn");
 /* *********************************************** */
 /*              Initialization Constants           */
 /* *********************************************** */
-const toothpicksHandMade = 1;
+const toothpicksHandMade = 10;
 const autoTailorBasePrice = 5.55;
 const twigsBaseQty = 1000;
-const twigsOnEarthBaseQty = 10000000;
+const twigsOnEarthBaseQty = 100000;
 const bonusPrice = 0;
 
 /* *********************************************** */
@@ -43,13 +43,18 @@ let twigsOnEarth = twigsOnEarthBaseQty;
 let availableFunds = 0;
 let autoTailor = 0;
 let sellPrice = 0.05;
-let twigsPrice = 10;
 let autoTailorPrice = autoTailorBasePrice;
 let salesQty = 1;
 let autoBuy = false;
 let marketingLvl = 1;
 let marketingtCost = 100;
 let demand = 1;
+
+let twigsPrice = 10;
+let maxPrice = 25
+let marketTrend = 0; 
+let demandFactor = 1; 
+let supplyFactor = twigsOnEarthBaseQty / 2;
 
 /* *********************************************** */
 /*                Event Listener                   */
@@ -78,7 +83,7 @@ upMarketingBtn.addEventListener("click", () => {
   if (marketingtCost <= availableFunds) {
     marketingLvl = marketingLvl + 1;
     availableFunds = availableFunds - marketingtCost;
-    marketingtCost = marketingtCost * marketingLvl;
+    marketingtCost = marketingtCost * 1.5;;
     marketingLevelElement.textContent = formatNum(marketingLvl);
     availableFundsElement.textContent = formatPrice(availableFunds);
     marketingPriceElement.textContent = formatPrice(marketingtCost);
@@ -116,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
     buyPickMasterBtn.disabled = availableFunds < autoTailorPrice;
     upMarketingBtn.disabled = availableFunds < marketingtCost;
     
-
     if (autoBuy && twigs < 10) {
       buyTwigs();
     }
@@ -128,16 +132,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (toothpicks > 25000) {
       document.getElementById("toggleTraderBtn").style.display = "block";
     }
-
-    marketing = Math.pow(1.1, marketingLvl - 1);
-    demand = (0.80 / sellPrice) * marketing;
-    demand = demand + (demand / 10);
   }, 100);
 
   /* *********************************************** */
   /*                Interval handler                 */
   /* *********************************************** */
   setInterval(() => {
+
+    marketing = Math.pow(1.1, marketingLvl - 1);
+    demand = (0.80 / sellPrice) * marketing;
+    demand = demand + (demand / 10);
+
+    let demandFactor = (0.8 / sellPrice) * Math.pow(1.1, marketingLvl - 1);
+    let supplyFactor = Math.max(twigsOnEarth / 100000, 1);
+    let randomFluctuation = (Math.random() - 0.5) * 2;
+    let marketDemandTrend = (demandFactor / supplyFactor) + randomFluctuation;
+    let productionFactor = Math.floor(1 + (toothpicks / 1000));
+    salesQty = Math.max(productionFactor, Math.floor(1 * (1 + marketDemandTrend / 10))); 
+
     if (Math.random() < (demand/100)) {
       if (unsoldInventory >= salesQty) {
         availableFunds = bonusPrice + availableFunds + (salesQty * sellPrice);
@@ -146,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
         availableFundsElement.textContent = formatPrice(availableFunds);
       }
     }
-  }, 75);
+  }, 100);
 
   setInterval(() => {
     for (let i = 0; i < autoTailor; i++) {
@@ -155,15 +167,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 
   setInterval(() => {
+    twigsPrice += ((Math.random() * 10) - 5);
 
-    if (Math.random() < .020) {
-    twigsPrice = twigsPrice + 1;
-    if (twigsPrice > 20 ) {
-      twigsPrice = 10;
+    if (twigsPrice < 10) twigsPrice = 10;
+    
+    if (twigsPrice > maxPrice) {
+      twigsPrice = maxPrice;
+    } else {
+      maxPrice += Math.random() * 2;
     }
+ 
     twigsPriceElement.textContent = formatPrice(twigsPrice);
-  }
-  }, 100);
+  }, 2000)
 });
 
 /* *********************************************** */
