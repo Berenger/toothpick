@@ -20,30 +20,38 @@
         <p>
           Available Funds: $ <span id="availableFunds">0.00</span><br />
           Unsold Inventory: <span id="unsoldInventory">0</span><br />
-          <button id="downSellPriceBtn">Down</button> <button id="upSellPriceBtn">Up</button> Sell Price: <span id="sellPrice">0.05</span>
+          <button id="downSellCostBtn">Down</button> <button id="upSellCostBtn">Up</button> Sell Cost: <span id="sellCost">0.05</span>
         </p>
         <h4>Crafting</h4>
         <p>
-          <button id="buyTwigsBtn">Twigs</button>
-          <span id="twigsStock"></span> ounces<br />
-          Cost: $ <span id="twigsPrice">0.00</span><br />
-          Available: <span id="twigsOnEarth"></span> ounces<br />
-          <span id="toggleTraderBtn" class="action" style="display: none;">Trader: false</span>
+          <button id="buyWoodBtn">Wood</button>
+          <span id="woodStock"></span> ounces<br />
+          Cost: $ <span id="woodCost">0.00</span><br />
+          Available: <span id="woodAvailable"></span> ounces<br />
+          <span id="toggleTraderBtn" class="action" style="display: none;">AutoPickup: false</span>
         </p>
         <br />
         <p id="autoTailorGst" style="display: none;">
           <button id="buyPickMasterBtn">AutoTailor</button>
           <span id="autoTailor">0</span><br />
-          Cost: $ <span id="autoTailorPrice">5.50</span>
+          Cost: $ <span id="autoTailorCost">5.50</span>
         </p>
         <h4>Marketing</h4>
         <p>
           Level: <span id="marketingLevel">1</span><br />
-          <button id="upMarketingBtn">Up</button> Cost: $ <span id="marketingPrice">100</span>
+          <button id="upMarketingBtn">Up</button> Cost: $ <span id="marketingCost">100</span>
         </p>
       </div>
       <div class="column two"></div>
-      <div class="column three"></div>
+      <div class="column three">
+        <div id="ForestGst" style="display: none;"></p>
+        <h4>Forest</h4>
+        <p>
+          Number: <span id="numberForest">1</span><br />
+          <button id="buyNewForestBtn">Up</button> Cost: $ <span id="forestCost">250</span>
+        </p>
+        </div>
+      </div>
     </div>
 
     <script src="main.js"></script>
